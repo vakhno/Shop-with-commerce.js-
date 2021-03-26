@@ -25,7 +25,7 @@ const App = () => {
 	}, [tokenId])
 
 	return (
-		<Router>
+		<Router basename='/Shop-with-commerceJS'>
 			<div>
 				<Navbar/>
 				<Switch>
