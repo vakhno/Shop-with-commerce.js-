@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.js": "/vakhno/Shop-with-commerceJS/static/js/main.c0e5dcca.chunk.js",
+    "main.js.map": "/vakhno/Shop-with-commerceJS/static/js/main.c0e5dcca.chunk.js.map",
+    "runtime-main.js": "/vakhno/Shop-with-commerceJS/static/js/runtime-main.3edada9f.js",
+    "runtime-main.js.map": "/vakhno/Shop-with-commerceJS/static/js/runtime-main.3edada9f.js.map",
+    "static/js/2.201a0642.chunk.js": "/vakhno/Shop-with-commerceJS/static/js/2.201a0642.chunk.js",
+    "static/js/2.201a0642.chunk.js.map": "/vakhno/Shop-with-commerceJS/static/js/2.201a0642.chunk.js.map",
+    "index.html": "/vakhno/Shop-with-commerceJS/index.html",
+    "static/js/2.201a0642.chunk.js.LICENSE.txt": "/vakhno/Shop-with-commerceJS/static/js/2.201a0642.chunk.js.LICENSE.txt",
+    "static/media/commerce.457bea4f.png": "/vakhno/Shop-with-commerceJS/static/media/commerce.457bea4f.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3edada9f.js",
+    "static/js/2.201a0642.chunk.js",
+    "static/js/main.c0e5dcca.chunk.js"
+  ]
+}
