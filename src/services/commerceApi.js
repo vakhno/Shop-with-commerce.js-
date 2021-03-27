@@ -6,85 +6,92 @@ import {setToken} from '../redux/actions/token'
 import {setSubdivision} from '../redux/actions/subdivisions'
 import {setOptions} from '../redux/actions/shippingOptions'
 import {setOrder} from '../redux/actions/order'
+import {setFilters} from '../redux/actions/filter'
 
-export const getProducts = async (dispatch) => {
-	const response = await commerce.products.list()
+export const getProducts = async (dispatch, slug=[]) => {
+	const response = await commerce.products.list({category_slug: slug === 'all' ? [] : [slug],})
 	.catch((error) => console.log(`Помилка при отриманні товарів: ${error}`))
-	
+
 	dispatch(setProducts(response.data))
 }
 
 export const getCart = async (dispatch) => {
 	const response = await commerce.cart.retrieve()
 	.catch((error) => console.log(`Error: ${error}`))
-	
+
 	dispatch(setCart(response))
 }
 
 export const handleAddToCart = async (dispatch, productId, quantity) => {
-	const item = await commerce.cart.add(productId, quantity)
+	const response = await commerce.cart.add(productId, quantity)
 
-	dispatch(setCart(item.cart))
+	dispatch(setCart(response.cart))
 }
 
 export const updateCartItemQuantity = async (dispatch, productId, quantity) => {
-	const item = await commerce.cart.update(productId, {quantity})
+	const response = await commerce.cart.update(productId, {quantity})
 
-	dispatch(setCart(item.cart))
+	dispatch(setCart(response.cart))
 }
 
 export const removeCartItem = async (dispatch, productId) => {
-	const item = await commerce.cart.remove(productId)
+	const response = await commerce.cart.remove(productId)
 
-	dispatch(setCart(item.cart))
+	dispatch(setCart(response.cart))
 }
 
 export const handleClearCart = async (dispatch) => {
-	const item = await commerce.cart.empty()
+	const response = await commerce.cart.empty()
 
 	dispatch(clearCart())
 }
 
 export const generateToken = async (dispatch, cartId) => {
-	console.log(cartId)
-	const token = await commerce.checkout.generateToken(cartId, {type: 'cart'})
+	const response = await commerce.checkout.generateToken(cartId, {type: 'cart'})
 	.catch((error) => console.log(`Помилка при формувані ТОКЕНА: ${error}`))
 
-	dispatch(setToken(token))
+	dispatch(setToken(response))
 }
 
 export const getShippingCountries = async (dispatch, tokenId) => {
-	const countriesList = await commerce.services.localeListShippingCountries(tokenId)
+	const response = await commerce.services.localeListShippingCountries(tokenId)
 	.catch((error) => console.log(`Помилка при отрманні списку країн: ${error}`))
 
-	dispatch(getCountries(countriesList.countries))
+	dispatch(getCountries(response.countries))
 }
 
 export const getSubdivisions = async (dispatch, countryCode) => {
-	const subdivisionsList = await commerce.services.localeListSubdivisions(countryCode)
+	const response = await commerce.services.localeListSubdivisions(countryCode)
 	.catch((error) => console.log(`Помилка при отрманні регіонів країни: ${error}`))
 	
-	dispatch(setSubdivision(subdivisionsList.subdivisions))
+	dispatch(setSubdivision(response.subdivisions))
 }
 
 export const getShippingOptions = async (dispatch, tokenId, country, subdivision=null) => {
-	const options = await commerce.checkout.getShippingOptions(tokenId, {country})
+	const response = await commerce.checkout.getShippingOptions(tokenId, {country})
 	.catch((error) => console.log(`Помилка при отрманні типу і вартості доставки: ${error}`))
 
-	dispatch(setOptions(options))
+	dispatch(setOptions(response))
 }
 
 export const refreshCart = async (dispatch) => {
-	const newCart = await commerce.cart.refresh()
+	const response = await commerce.cart.refresh()
 	.catch((error) => console.log(`Помилка при оновлені кошика: ${error}`))
 
-	dispatch(setCart(newCart))
+	dispatch(setCart(response))
 }
 
 export const handleCaptureCheckout = async (dispatch, tokenId, newOrder) => {
-	const incomingOrder = await commerce.checkout.capture(tokenId, newOrder)
+	const response = await commerce.checkout.capture(tokenId, newOrder)
 	.catch((error) => console.log(`Помилка при формувані замовлення: ${error}`))
 
-	dispatch(setOrder(incomingOrder))
+	dispatch(setOrder(response))
 	refreshCart(dispatch)
+}
+
+export const setFilter = async (dispatch) => {
+	const response = await commerce.categories.retrieve([], { type: 'slug' })
+	.catch((error) => console.log(`Помилка при отриманні списку фільтрів: ${error}`))
+
+	dispatch(setFilters(response.data))
 }

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {Navbar, Products, Cart, Checkout} from './components/'
-import {getProducts, getCart, generateToken, getShippingCountries} from './services/commerceApi'
+import {getProducts, getCart, generateToken, getShippingCountries, setFilter} from './services/commerceApi'
 import {useSelector, useDispatch} from "react-redux"
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
@@ -12,7 +12,7 @@ const App = () => {
 	const tokenId = useSelector(({token}) => token.id)
 
 	useEffect(() => {
-		getProducts(dispatch)
+		setFilter(dispatch)
 		getCart(dispatch)	
 	}, [])
 

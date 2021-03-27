@@ -1,6 +1,7 @@
 import React from 'react'
 import {Grid} from '@material-ui/core'
 import Product from '../Product/Product'
+import Filter from '../Filter/Filter'
 import useStyles from './StylesProducts'
 import {useSelector} from 'react-redux'
 import {handleAddToCart} from '../../services/commerceApi'
@@ -13,6 +14,7 @@ const Products = () => {
 	return (
 		<main className={classes.content}>
 			<div className={classes.toolbar}/>
+			<Filter/>
 			<Grid container justify='center' spacing={4}>
 				{isLoaded &&
 					products.map( (product, index) => {

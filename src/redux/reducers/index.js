@@ -9,6 +9,7 @@ import subdivisions from './subdivisions'
 import options from './shippingOptions'
 import userShippingData from './userShippingData'
 import order from './order'
+import filter from './filter'
 
 const rootReducer = combineReducers({
 	products,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
 	options,
 	userShippingData,
 	order,
+	filter,
 })
 
 export default rootReducer
