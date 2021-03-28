@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Navbar, Products, Cart, Checkout} from './components/'
+import {Navbar, Products, Cart, Checkout, ProductDetails} from './components/'
 import {getProducts, getCart, generateToken, getShippingCountries, setFilter} from './services/commerceApi'
 import {useSelector, useDispatch} from "react-redux"
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
@@ -31,6 +31,9 @@ const App = () => {
 				<Switch>
 					<Route exact path='/'>
 						<Products />
+					</Route>
+					<Route path='/products/:productId'>
+						<ProductDetails />
 					</Route>
 					<Route exact path='/cart'>
 						<Cart />

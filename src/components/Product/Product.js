@@ -3,6 +3,7 @@ import {Card, CardMedia, CardContent, CardActions, Typography, IconButton} from 
 import {AddShoppingCart} from '@material-ui/icons'
 import useStyles from './StylesProduct'
 import {useDispatch} from "react-redux"
+import {Link} from 'react-router-dom'
 
 const Product = ({id, name, image, description, price, onAddToCart}) => {
 	const dispatch = useDispatch()
@@ -10,7 +11,9 @@ const Product = ({id, name, image, description, price, onAddToCart}) => {
 
 	return (
 		<Card className={classes.root}> 
-			<CardMedia className={classes.media} image={image} title={name}/>
+			<Link to={`products/${id}`}>
+				<CardMedia className={classes.media} image={image} title={name}/>
+			</Link>
 			<CardContent>
 				<div className={classes.cardContent}>
 					<Typography variant='h5' gutterBottom>
